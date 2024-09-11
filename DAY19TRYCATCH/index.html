@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #LoginMain{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="SignupMain">
+        <h1>Signup Page</h1>
+        <form id="signupForm">
+             <input type="text" placeholder="UserName" id="username"><br>
+              <span id="usernameText"></span>
+             <input type="text" placeholder="Email ID" id="email"><br>
+             <span id="emailText"></span>
+             <input type="text" placeholder="Password" id="password"><br>
+             <span id="PasswordText"></span>
+             <input type="submit">
+        </form>
+        <p id="signupSwapButton">Already an account ? Login</p>
+    </div>
+    <div id="LoginMain">
+        <h1>Login Page</h1>
+        <form id="loginForm">
+            <input type="text" placeholder="Email Id" id="loginEmail">
+            <span></span>
+            <input type="text" placeholder="Password" id="loginPassword">
+            <span></span>
+            <input type="submit">
+        </form>
+        <p id="swapButton">New to Website? Create an account</p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
