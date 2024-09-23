@@ -24,11 +24,18 @@ d.addEventListener("submit", (e)=>{
     let email  = document.querySelector("#email").value
     let username = document.querySelector("#username").value
     let password = document.querySelector("#password").value
+    
+    let emailRegex = /[A-Za-z0-9\._%+\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,}/
+    // console.log(emailRegex.test(email))
+
+    let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&^])[A-Za-z\d@.#$!%*?&]{8,15}$/;
+    console.log(passwordRegex.test(password))
+
     if(username.length == 0){
        document.querySelector("#usernameText").innerText = "UserName Required!!"
        isValid = false
     }
-    if(email.length == 0){
+    if(email.length == 0 && !emailRegex.test(email)){
       document.querySelector("#emailText").innerText = "Email Required!!"
       isValid = false
      }
