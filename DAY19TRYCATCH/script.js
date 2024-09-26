@@ -1,6 +1,6 @@
 // getElementById()
 let d = document.querySelector("#signupForm")
-let data = []
+let data = JSON.parse(localStorage.getItem("data")) || []
 let isValid = true
 
 
@@ -52,6 +52,7 @@ d.addEventListener("submit", (e)=>{
     if(isValid == true){
       data.push(obj)
       alert("User Signup Successfully")
+      localStorage.setItem("data",JSON.stringify(data))
     }
    console.log(data)
 })
