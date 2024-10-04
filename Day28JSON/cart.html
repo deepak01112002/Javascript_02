@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     
+    <div id="box">
+
+    </div>
+
+    <script>
+        fetch(`http://localhost:3000/cart`)
+        .then((res)=>{
+            return res.json()
+        })
+        .then((res)=>{
+            document.getElementById("box").innerHTML = view(res)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+
+        function view(arr){
+            return arr.map((el)=>{
+                 return `
+                    <div>
+                       <img src="${el.img}" width="250px"/>    
+                    </div>
+                 `
+            })
+        }
+     
+
+    </script>
+</body>
+</html>
