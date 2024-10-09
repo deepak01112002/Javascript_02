@@ -3,7 +3,7 @@
 function FetchingData() {
     let data = new URLSearchParams(window.location.search)
     let id = data.get("id")
-    fetch(`http://localhost:3000/products?id=${id}`)
+    fetch(`https://mockserverjs02.onrender.com/products?id=${id}`)
         .then((res) => {
             return res.json()
         })
@@ -32,7 +32,7 @@ function view(arr) {
 }
 
 function addToCart(res) {
-    fetch(`http://localhost:3000/cart?id=${res[0].id}`)
+    fetch(`https://mockserverjs02.onrender.com/cart?id=${res[0].id}`)
         .then((res) => {
             return res.json()
         })
@@ -40,7 +40,7 @@ function addToCart(res) {
             if (Res.length > 0) {
                 alert("Item is Already Present in Cart !!!!!")
             } else {
-                fetch(`http://localhost:3000/cart`, {
+                fetch(`https://mockserverjs02.onrender.com/cart`, {
                     method: "POST",
                     headers: {
                         'Content-Type': "application/json"

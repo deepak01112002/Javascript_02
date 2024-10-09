@@ -1,6 +1,6 @@
 function FetchingData(){
     
-    fetch(`http://localhost:3000/products`)
+    fetch(`https://mockserverjs02.onrender.com/products`)
     .then((Res)=>{
         return Res.json()
     })
