@@ -1,17 +1,52 @@
 
-fetch(`https://api.themoviedb.org/3/trending/movie/day?language=en-US`,{
-    method : "GET",
-    headers : {
-        "Content-Type" : "application/json",
-        "Authorization" : "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NTNkMmQ1OGQyMzA1NTNjYjc1MDhiYzQ2NzQ1NzY4YSIsIm5iZiI6MTcyODQ2NDc2MS41MzI5NTYsInN1YiI6IjY2ZTdiZGEwOWRmYmJkZjBlNmNmZGIwMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8MMcHhAZlIh4VdwVILcxMiRGxVQcqK-vk10IAVHrr10"
+// fetch(`https://imdb-top-100-movies.p.rapidapi.com/`,{
+//     method : "GET",
+//     headers : {
+//         'x-rapidapi-key': 'da62e56a70msh0299196bccf7721p14eea4jsn119dec22976c',
+// 		'x-rapidapi-host': 'imdb-top-100-movies.p.rapidapi.com'
+//     }
+// })
+// .then((res)=>res.json())
+// .then((Res)=>{
+//     console.log(Res)
+// })
+// .catch((Err)=>{
+//     console.log(Err)
+// })
+
+let movieName = document.getElementById("search")
+let option = document.getElementById("opt")
+
+movieName.addEventListener("input",()=>{
+    if(movieName.value){
+        fetchData(movieName.value)
     }
+    
 })
-.then((res)=>res.json())
-.then((Res)=>{
-    console.log(Res)
-})
-.catch((Err)=>{
-    console.log(Err)
+
+document.getElementById("opt").addEventListener("change",()=>{
+     
+     if(option.value){
+        fetchData(movieName.value,option.value)
+     }
 })
 
 
+function fetchData(movie,type="movie"){
+    
+    fetch(`https://www.omdbapi.com/?apikey=f296becc&s=${movie}&type=${type}`)
+    .then((Res)=>Res.json())
+    .then((res)=>{
+        
+        if(res.Response == 'False'){
+            console.log("Data nahi hai !!!!")
+        }else{
+            console.log(res)
+            document.getElementById("box").innerHTML = `<img src="${res.Search[0].Poster}">`
+            
+        }
+    })
+    .catch((Err)=>{
+        console.log(Err)
+    })
+}
