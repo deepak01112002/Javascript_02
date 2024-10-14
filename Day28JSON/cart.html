@@ -1,39 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-     
+
     <div id="box">
 
     </div>
 
     <script>
-        fetch(`https://mockserverjs02.onrender.com/cart`)
-        .then((res)=>{
-            return res.json()
-        })
-        .then((res)=>{
-            document.getElementById("box").innerHTML = view(res)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
+        fetch(`http://localhost:3000/cart`)
+            .then((res) => {
+                return res.json()
+            })
+            .then((res) => {
+                document.getElementById("box").innerHTML = view(res)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
 
-        function view(arr){
-            return arr.map((el)=>{
-                 return `
+        function view(arr) {
+            return arr.map((el) => {
+                return `
                     <div>
-                       <img src="${el.img}" width="250px"/>    
+                       <img src="${el.img}" width="250px"/> 
+                        <button onclick="EditData(${el.id},${el.quantity},'dec')">-</button>
+                        <input value="${el.quantity}" disabled/>   
+                        <button onclick="EditData(${el.id},${el.quantity},'inc')">+</button> 
+                       <button onclick="DeleteData(${el.id})">Delete</button>
                     </div>
                  `
             })
         }
-     
+        function EditData(id, quantity, clickbtn) {
+            let a = quantity;
+            if (clickbtn == 'inc') {
+                a = a + 1
+            } else if (clickbtn == 'dec') {
+                a = a - 1
+            }
+            fetch(`http://localhost:3000/cart/${id}`, {
+                method: "PATCH",
+                headers : {
+                    'Content-Type' : "application/json"
+                },
+                body: JSON.stringify({quantity : a})
+            }).then((res) => {
+                return res.json()
+            })
+                .then((res) => {
+                    console.log(res)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+
+        }
+        function DeleteData(id) {
+            fetch(`http://localhost:3000/cart/${id}`, {
+                method: "DELETE"
+            }).then((res) => {
+                return res.json()
+            })
+                .then((res) => {
+                    console.log(res)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        }
 
     </script>
 </body>
+
 </html>

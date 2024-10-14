@@ -32,7 +32,7 @@ function view(arr) {
 }
 
 function addToCart(res) {
-    fetch(`https://mockserverjs02.onrender.com/cart?id=${res[0].id}`)
+    fetch(`http://localhost:3000/cart?id=${res[0].id}`)
         .then((res) => {
             return res.json()
         })
@@ -40,12 +40,12 @@ function addToCart(res) {
             if (Res.length > 0) {
                 alert("Item is Already Present in Cart !!!!!")
             } else {
-                fetch(`https://mockserverjs02.onrender.com/cart`, {
+                fetch(`http://localhost:3000/cart`, {
                     method: "POST",
                     headers: {
                         'Content-Type': "application/json"
                     },
-                    body: JSON.stringify(res[0])
+                    body: JSON.stringify({...res[0],quantity : 1})
                 })
                     .then((Res) => {
                         return Res.json()
